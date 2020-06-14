@@ -27,9 +27,16 @@ echo $usuarios
 $usuarios = new Usuario("oliver","123");
 $usuarios->insert();
 */
+
+/*
+//alterando
 //chamando um usuario especifico
 $usuarios->loadById(5);
 $usuarios->update("Proz", "!@!@");
  echo $usuarios;
+*/
 
+$usuarios->loadById(5);
+$usuarios->delete();
+echo $usuarios;
  ?>
