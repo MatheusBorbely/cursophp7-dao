@@ -92,6 +92,31 @@ class Usuario{
 			echo "errado";
 		}
 	}
+	public function insert() {
+	
+		$sql = new Sql();
+
+		$sql->query("INSERT INTO tb_usuarios (deslogin, dessenha) VALUES (:LOGIN, :PASSWORD)", array(
+
+		'LOGIN' => $this->getDeslogin(),
+		'PASSWORD' => $this->getDessenha(),
+		));
+
+	}
+	public function update($login,$senha) {
+		$this->setDeslogin($login);
+		$this->setDessenha($senha);
+	
+		$sql = new Sql();
+
+		$sql->query("UPDATE tb_usuarios SET deslogin = :LOGIN, dessenha = :SENHA WHERE idusuario = :ID", array(
+
+		'LOGIN' => $this->getDeslogin(),
+		'SENHA' => $this->getDessenha(),
+		':ID' => $this->getIdusuario()
+		));
+
+	}
 
 	public static function getList(){
 
@@ -112,6 +137,11 @@ class Usuario{
 			"dtcadastro" => $this->getDtcadastro()->format("d/m/Y H:i:s")
 
 		));
+	}
+	public function __construct($login = "",$senha = ""){
+		$this->setDeslogin($login);
+		$this->setDessenha($senha);
+
 	}
 }
 
