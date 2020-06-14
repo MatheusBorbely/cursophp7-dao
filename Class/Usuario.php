@@ -49,6 +49,32 @@ class Usuario{
 
 
 		));
+
+		if(count($results) > 0){
+			$row = $results[0];
+
+
+
+			$this->setIdusuario($row['idusuario']);
+			$this->setDeslogin($row['deslogin']);
+			$this->setDessenha($row['dessenha']);
+			$this->setDtcadastro(new DateTime($row['dtcadastro']));
+
+		}
+
+	}
+
+	public function login($login, $senha){
+
+		$sql = new Sql();
+
+		$results = $sql->select("SELECT * FROM tb_usuarios WHERE deslogin = :LOGIN AND dessenha = :SENHA", array(
+
+			":LOGIN" => $login,
+			":SENHA" => $senha
+
+
+		));
 		
 		if(count($results) > 0){
 			$row = $results[0];
@@ -61,6 +87,20 @@ class Usuario{
 			$this->setDtcadastro(new DateTime($row['dtcadastro']));
 
 		}
+		else{
+
+			echo "errado";
+		}
+	}
+
+	public static function getList(){
+
+		$sql = new Sql();
+
+		return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
+
+
+
 
 	}
 	public function __toString(){
